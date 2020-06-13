@@ -1,0 +1,54 @@
+@import "~antd/dist/antd.css";
+.App {
+  text-align: center;
+}
+
+.main-contianer {
+}
+.event-title {
+  cursor: pointer;
+}
+
+.media-list {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+.media-icon {
+  width: 2.5em;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.data-panel {
+  margin-top: 20px;
+}
+
+.icon-wrapper {
+  position: relative;
+  padding: 0px 30px;
+  display: flex;
+  align-items: center;
+}
+
+.icon-wrapper .anticon {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.icon-wrapper .anticon:first-child {
+  left: 0;
+}
+
+.icon-wrapper .anticon:last-child {
+  right: 0;
+}
+
+.globe-button {
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+}
