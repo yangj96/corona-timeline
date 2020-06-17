@@ -4,9 +4,17 @@ import "../App.css";
 import {
   GlobalOutlined,
 } from "@ant-design/icons";
+import CoronaMap from "./CoronaMap";
 
 class GlobeDiv extends React.Component {
-  state = { visible: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+      country: ""
+    }
+  }
+
   showModal = () => {
     this.setState({
       visible: true,
@@ -26,6 +34,16 @@ class GlobeDiv extends React.Component {
     });
   };
 
+  getChildrenMsg = (result, msg) => {
+    console.log(msg);
+    // result是子组件那bind的第一个参数this
+    this.setState({
+      country: msg,
+      visible: false
+    });
+    this.props.parent.countrySelected(this, this.state.country);
+  };
+
   render() {
     return (
       <div>
@@ -38,11 +56,14 @@ class GlobeDiv extends React.Component {
           />
         </div>
         <Modal
+          width="1024px"
+          style = {{}}
           title="Select Country/Region"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-        ><p>Should have a world map</p>
+        >
+          <CoronaMap parent={this}/>
         </Modal>
       </div>
     );

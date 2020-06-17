@@ -2,6 +2,7 @@ import React from "react";
 import { Timeline } from "antd";
 import "../App.css";
 import EventModal from "./EventModal";
+import GlobeDiv from "./GlobeDiv";
 
 class EventLine extends React.Component {
   constructor(props) {
@@ -11,14 +12,14 @@ class EventLine extends React.Component {
       visible: false,
       isFirst: false,
       isLast: false,
-      count: 10,
-      selectCountry: false,
+      count: 20,
+      selectCountry: "",
       events: [
         {
           "time": "2020-02-01",
           "title": "xxxxxx",
           "disc": "yyyyy",
-          "country": "",
+          "country": "CANADA",
           "type": 0,
           "id": 0
         },
@@ -26,7 +27,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "CANADA",
           "type": 0,
           "id": 1
         },
@@ -34,7 +35,7 @@ class EventLine extends React.Component {
           "time": "2020-02-03",
           "title": "bbbbbb",
           "disc": "cccccc",
-          "country": "",
+          "country": "CANADA",
           "type": 0,
           "id": 2
         },
@@ -42,7 +43,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "CHINA",
           "type": 0,
           "id": 3
         },
@@ -50,7 +51,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "CHINA",
           "type": 0,
           "id": 4
         },
@@ -58,7 +59,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "CHINA",
           "type": 0,
           "id": 5
         },
@@ -66,7 +67,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "CHINA",
           "type": 0,
           "id": 6
         },
@@ -74,7 +75,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "CHINA",
           "type": 0,
           "id": 7
         },
@@ -82,9 +83,17 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "Russia",
           "type": 0,
           "id": 8
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "Russia",
+          "type": 0,
+          "id": 9
         },
         {
           "time": "2020-02-06",
@@ -93,7 +102,79 @@ class EventLine extends React.Component {
           "country": "",
           "type": 0,
           "id": 9
-        }
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
+        {
+          "time": "2020-02-06",
+          "title": "zzzzz",
+          "disc": "aaaaaa",
+          "country": "",
+          "type": 0,
+          "id": 9
+        },
       ]
     }
   }
@@ -102,10 +183,17 @@ class EventLine extends React.Component {
     this.setState({id, visible: true});
   }
 
+  countrySelected = (result, msg) => {
+    console.log(msg);
+    this.setState({
+      selectCountry: msg
+    });
+  };
+
   render() {
     let timeList = (count) => {
       let res = [];
-      if (!this.state.selectCountry) {
+      if (this.state.selectCountry === "") {
         for(let i = 0; i < count; i++) {
           res.push(
             <Timeline.Item
@@ -114,6 +202,18 @@ class EventLine extends React.Component {
               {this.state.events[i].disc}
             </Timeline.Item>
           )
+        }
+      } else {
+        for(let i = 0; i < count; i++) {
+          if (this.state.events[i].country.toLowerCase()  === this.state.selectCountry.toLowerCase()) {
+            res.push(
+              <Timeline.Item
+                label={this.state.events[i].time + " " + this.state.events[i].title}
+                onClick={() => this.handleClick(this.state.events[i].id)}>
+                {this.state.events[i].disc}
+              </Timeline.Item>
+            )
+          }
         }
       }
       return res;
@@ -125,6 +225,7 @@ class EventLine extends React.Component {
           {timeList(this.state.count)}
         </Timeline>
         <EventModal id={this.state.id} visible={this.state.visible}/>
+        <GlobeDiv parent={this}/>
       </div>
     );
   }

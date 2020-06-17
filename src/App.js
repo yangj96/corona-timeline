@@ -8,7 +8,6 @@ class App extends React.Component {
     return (
       <div className="main-container">
         <EventLine />
-        <GlobeDiv />
       </div>
     );
   }
