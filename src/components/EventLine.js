@@ -4,6 +4,13 @@ import "../App.css";
 import EventModal from "./EventModal";
 import GlobeDiv from "./GlobeDiv";
 
+const typeColorDict = {
+  0: "green",
+  1: "blue",
+  2: "orange",
+  3: "purple"
+};
+
 class EventLine extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +19,7 @@ class EventLine extends React.Component {
       visible: false,
       isFirst: false,
       isLast: false,
-      count: 20,
+      count: 15,
       selectCountry: "",
       events: [
         {
@@ -28,7 +35,7 @@ class EventLine extends React.Component {
           "title": "zzzzz",
           "disc": "aaaaaa",
           "country": "CANADA",
-          "type": 0,
+          "type": 1,
           "id": 1
         },
         {
@@ -44,7 +51,7 @@ class EventLine extends React.Component {
           "title": "zzzzz",
           "disc": "aaaaaa",
           "country": "CHINA",
-          "type": 0,
+          "type": 2,
           "id": 3
         },
         {
@@ -52,7 +59,7 @@ class EventLine extends React.Component {
           "title": "zzzzz",
           "disc": "aaaaaa",
           "country": "CHINA",
-          "type": 0,
+          "type": 3,
           "id": 4
         },
         {
@@ -60,7 +67,7 @@ class EventLine extends React.Component {
           "title": "zzzzz",
           "disc": "aaaaaa",
           "country": "CHINA",
-          "type": 0,
+          "type": 2,
           "id": 5
         },
         {
@@ -76,7 +83,7 @@ class EventLine extends React.Component {
           "title": "zzzzz",
           "disc": "aaaaaa",
           "country": "CHINA",
-          "type": 0,
+          "type": 1,
           "id": 7
         },
         {
@@ -99,7 +106,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "Russia",
           "type": 0,
           "id": 9
         },
@@ -107,7 +114,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "Russia",
           "type": 0,
           "id": 9
         },
@@ -115,7 +122,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "Russia",
           "type": 0,
           "id": 9
         },
@@ -123,7 +130,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
+          "country": "Russia",
           "type": 0,
           "id": 9
         },
@@ -131,47 +138,7 @@ class EventLine extends React.Component {
           "time": "2020-02-06",
           "title": "zzzzz",
           "disc": "aaaaaa",
-          "country": "",
-          "type": 0,
-          "id": 9
-        },
-        {
-          "time": "2020-02-06",
-          "title": "zzzzz",
-          "disc": "aaaaaa",
-          "country": "",
-          "type": 0,
-          "id": 9
-        },
-        {
-          "time": "2020-02-06",
-          "title": "zzzzz",
-          "disc": "aaaaaa",
-          "country": "",
-          "type": 0,
-          "id": 9
-        },
-        {
-          "time": "2020-02-06",
-          "title": "zzzzz",
-          "disc": "aaaaaa",
-          "country": "",
-          "type": 0,
-          "id": 9
-        },
-        {
-          "time": "2020-02-06",
-          "title": "zzzzz",
-          "disc": "aaaaaa",
-          "country": "",
-          "type": 0,
-          "id": 9
-        },
-        {
-          "time": "2020-02-06",
-          "title": "zzzzz",
-          "disc": "aaaaaa",
-          "country": "",
+          "country": "Russia",
           "type": 0,
           "id": 9
         },
@@ -198,6 +165,7 @@ class EventLine extends React.Component {
           res.push(
             <Timeline.Item
               label={this.state.events[i].time + " " + this.state.events[i].title}
+              color={typeColorDict[this.state.events[i].type]}
               onClick={() => this.handleClick(this.state.events[i].id)}>
               {this.state.events[i].disc}
             </Timeline.Item>
@@ -216,7 +184,10 @@ class EventLine extends React.Component {
           }
         }
       }
-      return res;
+      if (res.length)
+        return res;
+      else
+        return <p align="center">There is no news related to COVID-19 in this country!</p>
     };
 
     return (

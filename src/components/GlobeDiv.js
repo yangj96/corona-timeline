@@ -5,6 +5,7 @@ import {
   GlobalOutlined,
 } from "@ant-design/icons";
 import CoronaMap from "./CoronaMap";
+import BubbleMap from "./BubbleMap";
 
 class GlobeDiv extends React.Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class GlobeDiv extends React.Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          <CoronaMap parent={this}/>
+          <BubbleMap parent={this}/>
         </Modal>
       </div>
     );

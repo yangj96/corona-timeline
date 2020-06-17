@@ -3,7 +3,7 @@ import "../App.css";
 import {HeatmapLayer, LayerEvent, MapboxScene, PointLayer, PolygonLayer, Popup} from "@antv/l7-react";
 
 const colors =
-  ['#f7fcf0','#e0f3db','#ccebc5','#a8ddb5','#7bccc4','#4eb3d3','#2b8cbe','#08589e'].reverse();
+  ['#f7fcf0','#e0f3db','#ccebc5','#a8ddb5','#7bccc4','#4eb3d3','#2b8cbe','#08589e'];
 function joinData(geodata, ncovData) {
   const ncovDataObj = {};
   ncovData.forEach((item) => {
@@ -109,16 +109,16 @@ const BubbleMap = React.memo(function Map(props) {
       >
         {popupInfo && (
           <Popup lnglat={popupInfo.lnglat}>
-            {popupInfo.feature.name}
+            {popupInfo.feature.countryEnglishName}
             <ul
               style={{
                 margin: 0,
               }}
             >
-              <li>现有确诊:{popupInfo.feature.currentConfirmedCount}</li>
-              <li>累计确诊:{popupInfo.feature.confirmedCount}</li>
-              <li>治愈:{popupInfo.feature.curedCount}</li>
-              <li>死亡:{popupInfo.feature.deadCount}</li>
+              <li>Current Confirmed:{popupInfo.feature.currentConfirmedCount}</li>
+              <li>Total Confirmed:{popupInfo.feature.confirmedCount}</li>
+              <li>Cured:{popupInfo.feature.curedCount}</li>
+              <li>Dead:{popupInfo.feature.deadCount}</li>
             </ul>
           </Popup>
         )}
@@ -170,15 +170,17 @@ const BubbleMap = React.memo(function Map(props) {
             color={{
               field: 'confirmedCount',
               values: (count) => {
-                return count > 10000
+                return count > 100000
+                ? colors[7]
+                : count > 50000
                   ? colors[6]
-                  : count > 1000
+                  : count > 10000
                     ? colors[5]
-                    : count > 500
+                    : count > 5000
                       ? colors[4]
-                      : count > 100
+                      : count > 1000
                         ? colors[3]
-                        : count > 10
+                        : count > 100
                           ? colors[2]
                           : count > 1
                             ? colors[1]
@@ -195,7 +197,7 @@ const BubbleMap = React.memo(function Map(props) {
             }}
             size={{
               field: 'confirmedCount',
-              values: [0, 20],
+              values: [0, 25],
             }}
             style={{
               opacity: 0.6,
@@ -205,7 +207,7 @@ const BubbleMap = React.memo(function Map(props) {
             <LayerEvent type="click" handler={
               (item) => {
                 console.log(item.feature);
-                props.parent.getChildrenMsg(this, item.feature.properties.countryEnglishName);
+                props.parent.getChildrenMsg(this, item.feature.countryEnglishName);
               }
             } />
           </PointLayer>,
