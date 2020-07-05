@@ -22,31 +22,13 @@
 }
 
 .data-panel {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-.icon-wrapper {
+.progress-wrapper {
   position: relative;
-  padding: 0px 30px;
   display: flex;
   align-items: center;
-}
-
-.icon-wrapper .anticon {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  line-height: 1;
-  font-size: 1em;
-  color: rgba(0, 0, 0, 0.45);
-}
-
-.icon-wrapper .anticon:first-child {
-  left: 0;
-}
-
-.icon-wrapper .anticon:last-child {
-  right: 0;
 }
 
 .globe-button {
