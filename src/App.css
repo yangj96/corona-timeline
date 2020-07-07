@@ -54,3 +54,7 @@
 .l7-ctrl-logo {
   display: none !important;
 }
+
+.ant-tabs {
+  margin-top: 1em;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import { Modal, Progress, Tabs } from "antd";
+import { Modal, Progress, Tabs, Spin, Alert } from "antd";
 import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 const { TabPane } = Tabs;
 
@@ -9,8 +9,9 @@ class EventModal extends React.Component {
     super(props);
     this.state = {
       visible: false,
+      spin: true,
       title: "",
-      desc: "",
+      disc: "",
       type: 0,
       id: props.id,
       country: 0,
@@ -23,19 +24,20 @@ class EventModal extends React.Component {
     this.setState({
       visible: newProps.visible,
     });
-    let get_url = "http://39.97.176.70:3306/search/" + newProps.id + "/news";
-    fetch(get_url, {
+
+    fetch(`/test_timeline/event?id=${newProps.id}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json;charset=UTF-8",
+        "content-type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((response) => {
         console.log(response);
         this.setState({
+          spin: false,
           title: response.title,
-          desc: response.desc,
+          disc: response.disc,
           type: response.type,
           id: response.id,
           country: response.country,
@@ -46,35 +48,69 @@ class EventModal extends React.Component {
       .catch((error) => {
         console.log(error);
         let response = {
-          title: "Title " + newProps.id,
-          desc: "Description " + newProps.id,
-          type: 0,
-          id: newProps.id,
-          country: "cn",
-          time: 0,
+          country: "China",
+          disc: "Researchers at ...",
+          time: "2020-6-27",
+          id: 1,
+          title: "Spain discovers coronavirus in waste water...",
+          type: 5,
           media: [
             {
-              "media-name": "BBC",
-              "media-id": 0,
-              "news-title": "Title 1",
+              media_id: 1,
+              news_title: "Title 1",
               url: "https://www.bbc.com/news/world-us-canada-53026389",
               newsAttitude: 0,
-              newsAttiScore: 80,
+              newsAttiScore: 0.4,
             },
             {
-              "media-name": "CGTN",
-              "media-id": 1,
-              "news-title": "Title 2",
+              media_id: 2,
+              news_title: "Title 2",
+              url: "https://www.bbc.com/news/world-us-canada-53026389",
+              newsAttitude: 0,
+              newsAttiScore: 0.5,
+            },
+            {
+              media_id: 3,
+              news_title: "Title 3",
+              url: "https://www.bbc.com/news/world-us-canada-53026389",
+              newsAttitude: 0,
+              newsAttiScore: 0.6,
+            },
+            {
+              media_id: 4,
+              news_title: "Title 4",
+              url: "https://www.bbc.com/news/world-us-canada-53026389",
+              newsAttitude: 0,
+              newsAttiScore: 0.7,
+            },
+            {
+              media_id: 5,
+              news_title: "Title 5",
               url:
                 "https://news.cgtn.com/news/2020-06-13/Chinese-mainland-reports-11-new-COVID-19-cases-six-local-infections-RhwpVnijF6/index.html",
               newsAttitude: 2,
-              newsAttiScore: 60,
+              newsAttiScore: 0.8,
+            },
+            {
+              media_id: 6,
+              news_title: "Title 6",
+              url: "https://www.bbc.com/news/world-us-canada-53026389",
+              newsAttitude: 0,
+              newsAttiScore: 0.9,
+            },
+            {
+              media_id: 7,
+              news_title: "Title 7",
+              url: "https://www.bbc.com/news/world-us-canada-53026389",
+              newsAttitude: 0,
+              newsAttiScore: 1,
             },
           ],
         };
         this.setState({
+          spin: false,
           title: response.title,
-          desc: response.desc,
+          disc: response.disc,
           type: response.type,
           id: response.id,
           country: response.country,
@@ -84,26 +120,12 @@ class EventModal extends React.Component {
       });
   }
 
-  handleOk = (e) => {
-    // console.log(e);
+  closeModal = (e) => {
     this.setState({
       visible: false,
+      spin: true,
       title: "",
-      desc: "",
-      type: 0,
-      id: 0,
-      country: 0,
-      time: 0,
-      media: [],
-    });
-  };
-
-  handleCancel = (e) => {
-    // console.log(e);
-    this.setState({
-      visible: false,
-      title: "",
-      desc: "",
+      disc: "",
       type: 0,
       id: 0,
       country: 0,
@@ -115,34 +137,42 @@ class EventModal extends React.Component {
   render() {
     let mediaTabs = [];
     let atti = ["Neutral", "Left-Wing", "Right-Wing"];
+    let media_name = {
+      1: "CNN",
+      2: "Fox News",
+      3: "BBC",
+      4: "US News",
+      5: "CGTN",
+      6: "The Times",
+      7: "Xinhua",
+    };
     for (let i = 0; i < this.state.media.length; i++) {
+      let media_id = this.state.media[i]["media_id"];
       mediaTabs.push(
-        <TabPane tab={this.state.media[i]["media-name"]} key={i}>
+        <TabPane tab={media_name[media_id]} key={i}>
           <a
             href={this.state.media[i].url}
             target="_blank"
             rel="noopener noreferrer"
-            key={this.state.media[i]["media-id"]}
+            key={media_id}
           >
             <img
               className="media-icon"
-              alt={this.state.media[i]["media-name"]}
-              src={require("../assets/" +
-                this.state.media[i]["media-id"] +
-                ".jpg")}
+              alt={media_name[media_id]}
+              src={require(`../assets/${media_id}.jpg`)}
             ></img>
-            {this.state.media[i]["news-title"]}
+            {this.state.media[i]["news_title"]}
           </a>
           <div className="data-panel">
             <div>Attitude: {atti[this.state.media[i]["newsAttitude"]]}</div>
-            <div class="progress-wrapper">
+            <div className="progress-wrapper">
               Score:&nbsp;
               <Progress
                 strokeColor={{
                   "0%": "#108ee9",
                   "100%": "#87d068",
                 }}
-                percent={this.state.media[i]["newsAttiScore"]}
+                percent={100 * this.state.media[i]["newsAttiScore"]}
                 format={(percent) => {
                   if (percent < 60) return <FrownOutlined />;
                   else if (percent < 70) return <MehOutlined />;
@@ -157,13 +187,20 @@ class EventModal extends React.Component {
 
     return (
       <Modal
-        title={this.state.title}
+        title={this.state.time}
         visible={this.state.visible}
-        onOk={this.handleOk}
-        onCancel={this.handleCancel}
+        onOk={this.closeModal}
+        onCancel={this.closeModal}
+        closable={false}
       >
-        <p>{this.state.desc}</p>
-        <Tabs tabPosition="top">{mediaTabs}</Tabs>
+        <Spin tip="Loading..." spinning={this.state.spin}>
+          <Alert
+            message={this.state.title}
+            description={this.state.disc}
+            type="info"
+          />
+          <Tabs tabPosition="top">{mediaTabs}</Tabs>
+        </Spin>
       </Modal>
     );
   }
