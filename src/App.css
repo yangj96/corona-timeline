@@ -26,7 +26,7 @@
 }
 
 .globe-button {
-  position: absolute;
+  position: fixed;
   bottom: 100px;
   right: 100px;
 }
@@ -77,4 +77,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.ant-timeline-item-label {
+  width: calc(30% - 12px) !important;
+}
+.ant-timeline-item-content {
+  left: calc(30% - 10px) !important;
+}
+.ant-timeline-item-tail {
+  left: 30% !important;
+}
+
+.ant-timeline-item-head,
+.ant-timeline-item-head-blue {
+  left: 30% !important;
+}
+.ant-timeline-item {
+  font-size: 16px;
+  font-weight: bold;
+  /* font-style:italic; */
+  font-family: cursive;
 }
