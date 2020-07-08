@@ -25,12 +25,6 @@
   margin-top: 10px;
 }
 
-.progress-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
 .globe-button {
   position: absolute;
   bottom: 100px;
@@ -55,6 +49,32 @@
   display: none !important;
 }
 
+.ant-alert-description {
+  white-space: pre-line;
+}
+
 .ant-tabs {
   margin-top: 1em;
+}
+
+.news-li a,
+.progress-info div {
+  margin-right: 0.4em;
+}
+
+.progress-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-items: center;
+}
+
+.progress-wrapper {
+  width: 95%;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
