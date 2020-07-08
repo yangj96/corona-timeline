@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import { Modal, Progress, Tabs, Spin, Alert, Typography, Badge } from "antd";
 import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
-const { Title, Paragraph, Text } = Typography;
+const { Paragraph } = Typography;
 const { TabPane } = Tabs;
 
 class EventModal extends React.Component {
@@ -70,8 +70,6 @@ class EventModal extends React.Component {
           mediaArr.push(mediaObj);
         }
 
-        console.log(mediaArr);
-
         this.setState({
           spin: false,
           title: response.title,
@@ -85,76 +83,6 @@ class EventModal extends React.Component {
       })
       .catch((error) => {
         console.log(error);
-        // let response = {
-        //   country: "China",
-        //   disc: "Researchers at ...",
-        //   time: "2020-6-27",
-        //   id: 1,
-        //   title: "Spain discovers coronavirus in waste water...",
-        //   type: 5,
-        //   media: [
-        //     {
-        //       media_id: 1,
-        //       title: "Title 1",
-        //       url: "https://www.bbc.com/news/world-us-canada-53026389",
-        //       attitude: 0,
-        //       score: 0.4,
-        //     },
-        //     {
-        //       media_id: 2,
-        //       title: "Title 2",
-        //       url: "https://www.bbc.com/news/world-us-canada-53026389",
-        //       attitude: 0,
-        //       score: 0.5,
-        //     },
-        //     {
-        //       media_id: 3,
-        //       title: "Title 3",
-        //       url: "https://www.bbc.com/news/world-us-canada-53026389",
-        //       attitude: 0,
-        //       score: 0.6,
-        //     },
-        //     {
-        //       media_id: 4,
-        //       title: "Title 4",
-        //       url: "https://www.bbc.com/news/world-us-canada-53026389",
-        //       attitude: 0,
-        //       score: 0.7,
-        //     },
-        //     {
-        //       media_id: 5,
-        //       title: "Title 5",
-        //       url:
-        //         "https://news.cgtn.com/news/2020-06-13/Chinese-mainland-reports-11-new-COVID-19-cases-six-local-infections-RhwpVnijF6/index.html",
-        //       attitude: 2,
-        //       score: 0.8,
-        //     },
-        //     {
-        //       media_id: 6,
-        //       title: "Title 6",
-        //       url: "https://www.bbc.com/news/world-us-canada-53026389",
-        //       attitude: 0,
-        //       score: 0.9,
-        //     },
-        //     {
-        //       media_id: 7,
-        //       title: "Title 7",
-        //       url: "https://www.bbc.com/news/world-us-canada-53026389",
-        //       attitude: 0,
-        //       score: 1,
-        //     },
-        //   ],
-        // };
-        // this.setState({
-        //   spin: false,
-        //   title: response.title,
-        //   disc: response.disc,
-        //   type: response.type,
-        //   id: response.id,
-        //   country: response.country,
-        //   time: response.time,
-        //   media: response.media,
-        // });
       });
   }
 
