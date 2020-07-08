@@ -5,10 +5,12 @@ import EventModal from "./EventModal";
 import GlobeDiv from "./GlobeDiv";
 
 const typeColorDict = {
-  0: "green",
+  0: "yellow",
   1: "blue",
   2: "orange",
-  3: "purple"
+  3: "purple",
+  4: "red",
+  5: "green"
 };
 
 class EventLine extends React.Component {
