@@ -11,7 +11,8 @@
 
 `npm run build`
 
-`serve -s build`
+## Start Server
+`serve -s build -l 80`
 
 ## Project Structure
 ```$xslt
