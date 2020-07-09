@@ -42,7 +42,7 @@ class EventLine extends React.Component {
           // isfirst: response.isfirst,
           // islast: response.islast,
           count: response.count,
-          events: response.event,
+          events: response.events,
         });
       })
       .catch((error) => {
