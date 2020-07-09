@@ -42,6 +42,7 @@ class EventLine extends React.Component {
           // islast: response.islast,
           count: response.count,
           events: response.events,
+          loading: false
         });
       })
       .catch((error) => {
@@ -613,6 +614,7 @@ class EventLine extends React.Component {
         this.setState({
           count: response.count,
           events: response.events,
+          loading: false
         });
       });
   }
