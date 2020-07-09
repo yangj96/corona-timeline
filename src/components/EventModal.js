@@ -26,8 +26,9 @@ class EventModal extends React.Component {
       visible: newProps.visible,
     });
 
-    fetch(`/test_timeline/event?id=${newProps.id}`, {
+    fetch(`http://39.97.176.70:8080/test_timeline/event?id=${newProps.id}`, {
       method: "GET",
+      mode: "cors",
       headers: {
         "content-type": "application/json",
       },
@@ -102,7 +103,7 @@ class EventModal extends React.Component {
 
   render() {
     let mediaTabs = [];
-    let atti = ["Neutral", "Left-Wing", "Right-Wing"];
+    let atti = ["Left-Wing", "Neutral", "Right-Wing"];
     let media_name = {
       1: "CNN",
       2: "Fox News",
