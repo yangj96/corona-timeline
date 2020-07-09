@@ -1,5 +1,5 @@
 import React from "react";
-import { Affix, Timeline } from "antd";
+import { Spin, Timeline } from "antd";
 import "../App.css";
 import EventModal from "./EventModal";
 import GlobeDiv from "./GlobeDiv";
@@ -19,8 +19,7 @@ class EventLine extends React.Component {
     this.state = {
       id: 0,
       visible: false,
-      isfirst: 0,
-      islast: 0,
+      loading: true,
       count: 0,
       selectCountry: "",
       events: [],
@@ -636,51 +635,57 @@ class EventLine extends React.Component {
 
   render() {
     let timeList = (count) => {
-      let res = [];
-      if (this.state.selectCountry === "") {
-        for (let i = 0; i < count; i++) {
-          res.push(
-            <Timeline.Item
-              label={this.state.events[i].time}
-              color={typeColorDict[this.state.events[i].type - 1]}
-              onClick={() => this.handleClick(this.state.events[i].id)}
-            >
-              {this.state.events[i].title}
-            </Timeline.Item>
-          );
-        }
+      if (this.state.loading) {
+        return <p />;
       } else {
-        for (let i = 0; i < count; i++) {
-          if (
-            this.state.events[i].country.toLowerCase() ===
-            this.state.selectCountry.toLowerCase()
-          ) {
+        let res = [];
+        if (this.state.selectCountry === "") {
+          for (let i = 0; i < count; i++) {
             res.push(
-              <Timeline.Item
-                label={this.state.events[i].time}
-                color={typeColorDict[this.state.events[i].type - 1]}
-                onClick={() => this.handleClick(this.state.events[i].id)}
-              >
-                {this.state.events[i].title}
-              </Timeline.Item>
+                <Timeline.Item
+                    label={this.state.events[i].time}
+                    color={typeColorDict[this.state.events[i].type - 1]}
+                    onClick={() => this.handleClick(this.state.events[i].id)}
+                >
+                  {this.state.events[i].title}
+                </Timeline.Item>
             );
           }
+        } else {
+          for (let i = 0; i < count; i++) {
+            if (
+                this.state.events[i].country.toLowerCase() ===
+                this.state.selectCountry.toLowerCase()
+            ) {
+              res.push(
+                  <Timeline.Item
+                      label={this.state.events[i].time}
+                      color={typeColorDict[this.state.events[i].type - 1]}
+                      onClick={() => this.handleClick(this.state.events[i].id)}
+                  >
+                    {this.state.events[i].title}
+                  </Timeline.Item>
+              );
+            }
+          }
         }
+        if (res.length) return res;
+        else
+          return (
+              <p align="center">
+                There is no news related to COVID-19 in this country!
+              </p>
+          );
       }
-      if (res.length) return res;
-      else
-        return (
-          <p align="center">
-            There is no news related to COVID-19 in this country!
-          </p>
-        );
     };
 
     return (
       <div className="events-list">
-        <Timeline mode="left">{timeList(this.state.count)}</Timeline>
-        <EventModal id={this.state.id} visible={this.state.visible} />
-        <GlobeDiv parent={this} />
+        <Spin tip="Loading..." spinning={this.state.loading}>
+          <Timeline mode="left">{timeList(this.state.count)}</Timeline>
+          <EventModal id={this.state.id} visible={this.state.visible} />
+          <GlobeDiv parent={this} />
+        </Spin>
       </div>
     );
   }
