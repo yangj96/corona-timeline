@@ -36,7 +36,6 @@
 │   ├── index.js
 │   ├── logo.svg
 │   ├── serviceWorker.js
-│   ├── setupProxy.js
 │   └── setupTests.js
 ```
 The project entrance is /src/App.js, and the components of corona event timeline, event details modal and corona heatmap 
