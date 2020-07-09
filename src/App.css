@@ -84,6 +84,10 @@
 }
 .ant-timeline-item-content {
   left: calc(30% - 10px) !important;
+  cursor: pointer;
+}
+.ant-timeline-item-content:hover {
+  color: black;
 }
 .ant-timeline-item-tail {
   left: 30% !important;
@@ -93,6 +97,7 @@
 .ant-timeline-item-head-blue {
   left: 30% !important;
 }
+
 .ant-timeline-item {
   font-size: 16px;
   /* font-weight: bold; */
