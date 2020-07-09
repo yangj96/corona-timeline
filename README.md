@@ -15,7 +15,7 @@
 `serve -s build -l 80`
 
 ## Project Structure
-```$xslt
+```
 ├── README.md
 ├── package.json
 ├── public
