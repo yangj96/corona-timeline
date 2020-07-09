@@ -642,7 +642,7 @@ class EventLine extends React.Component {
           res.push(
             <Timeline.Item
               label={this.state.events[i].time}
-              color={typeColorDict[this.state.events[i].type]}
+              color={typeColorDict[this.state.events[i].type - 1]}
               onClick={() => this.handleClick(this.state.events[i].id)}
             >
               {this.state.events[i].title}
@@ -658,6 +658,7 @@ class EventLine extends React.Component {
             res.push(
               <Timeline.Item
                 label={this.state.events[i].time}
+                color={typeColorDict[this.state.events[i].type - 1]}
                 onClick={() => this.handleClick(this.state.events[i].id)}
               >
                 {this.state.events[i].title}
